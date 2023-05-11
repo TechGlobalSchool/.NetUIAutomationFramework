@@ -1,48 +1,45 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 namespace UIAutomationFramework;
 
 [TestFixture]
-public class Tests
+public class TGHeaderTest
 {
-    [Test]
-    public void validateTGLogo()
+    public IWebDriver driver;
+
+    [SetUp]
+    public void SetUp()
     {
-        IWebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.Manage().Window.Maximize();
         driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
 
         driver.Navigate().GoToUrl("https://techglobal-training.com/");
+    }
 
-        IWebElement logo = driver.FindElement(By.Id("logo"));
-
-        Assert.True(logo.Displayed);
-
-        Thread.Sleep(5000);
+    [TearDown]
+    public void TeardDown()
+    {
+        Thread.Sleep(3000);
 
         driver.Quit();
     }
 
+    [Test]
+    public void validateTGLogo()
+    { 
+        IWebElement logo = driver.FindElement(By.Id("logo"));
+        Assert.True(logo.Displayed);
+    }
 
     [Test]
     public void validateTGHeader()
     {
-        IWebDriver driver = new ChromeDriver();
-        driver.Manage().Window.Maximize();
-        driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-
-
-        driver.Navigate().GoToUrl("https://techglobal-training.com/");
-
         IWebElement heading = driver.FindElement(By.CssSelector(".HomePage_pageTitle__UAMbk"));
-
         Assert.True(heading.Displayed);
         Assert.That(heading.Text.Equals("Welcome to TechGlobal School\nTraining"));
-
-        Thread.Sleep(5000);
-
-        driver.Quit();
     }
 }
