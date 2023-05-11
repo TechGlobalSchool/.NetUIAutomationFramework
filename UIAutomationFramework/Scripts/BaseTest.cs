@@ -4,20 +4,19 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using UIAutomationFramework.EnvironmentConfiguration;
 using UIAutomationFramework.Pages;
+using UIAutomationFramework.Utils;
 
 namespace UIAutomationFramework
 {
 	public class BaseTest : EnvironmentSettings
 	{
         public BasePage basePage;
+        public MockInterviewsPage mockInterviewsPage;
 
         [SetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-
+            driver = Driver.GetDriver();
 
             driver.Navigate().GoToUrl("https://techglobal-training.com/");
             basePage = new BasePage();
@@ -26,9 +25,7 @@ namespace UIAutomationFramework
         [TearDown]
         public void TeardDown()
         {
-            Thread.Sleep(3000);
-
-            driver.Quit();
+            Driver.QuitDriver();
         }
     }
 }
