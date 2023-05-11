@@ -20,4 +20,16 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="113.0.5672.6300" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Scripts\" />
+    <None Remove="Pages\" />
+    <None Remove="EnvironmentConfiguration\" />
+    <None Remove="Utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+    <Folder Include="Pages\" />
+    <Folder Include="EnvironmentConfiguration\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
 </Project>
